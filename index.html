@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>다인이, 봉봉이 내 사랑들</title>
+    <title>오늘도 힘내세요</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;700&display=swap" rel="stylesheet">
@@ -20,44 +21,99 @@
             justify-content: center;
             align-items: center;
             font-family: 'Noto Sans KR', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #e2e8f0 0%, #f8fafc 100%);
+            color: #334155;
             overflow: hidden;
         }
 
         .card {
             text-align: center;
             padding: 4rem 6rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.7);
             transform: translateY(30px);
             opacity: 0;
-            animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.7);
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 40px;
             font-weight: 700;
-            letter-spacing: -2px;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: -1px;
+            color: #334155;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
             margin-bottom: 1rem;
         }
 
         .emoji {
-            font-size: 4rem;
-            margin-bottom: 1rem;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
             display: inline-block;
-            animation: bounce 2s infinite ease-in-out;
+            animation: bounce 2.5s infinite ease-in-out;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+        }
+
+        .btn {
+            margin-top: 1.5rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-family: inherit;
+            font-weight: 700;
+            color: #ffffff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .btn-blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-blue:hover {
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+        }
+
+        .btn-yellow {
+            background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%);
+            box-shadow: 0 4px 15px rgba(250, 204, 21, 0.4);
+        }
+
+        .btn-yellow:hover {
+            box-shadow: 0 8px 25px rgba(250, 204, 21, 0.6);
+        }
+
+        .btn-orange {
+            background: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+            box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4);
+        }
+
+        .btn-orange:hover {
+            box-shadow: 0 8px 25px rgba(251, 146, 60, 0.6);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%);
+            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+        }
+
+        .btn-green:hover {
+            box-shadow: 0 8px 25px rgba(74, 222, 128, 0.6);
         }
 
         @keyframes slideUpFade {
@@ -68,19 +124,56 @@
         }
 
         @keyframes bounce {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-15px);
             }
         }
     </style>
 </head>
+
 <body>
     <div class="card">
         <div class="emoji">💖</div>
-        <h1>다인이, 봉봉이 내 사랑들</h1>
+        <h1 id="messageText">오늘도 힘내세요</h1>
+        <button id="nextBtn" class="btn btn-blue">다음 문장 보기</button>
     </div>
+
+    <script>
+        const contentData = [
+            { text: '오늘도 힘내세요', btnColor: 'btn-blue' },
+            { text: '오늘도 해냈어요', btnColor: 'btn-yellow' },
+            { text: '조금씩 나아지고 있어요', btnColor: 'btn-orange' },
+            { text: '이대로 계속 가봅시다', btnColor: 'btn-green' }
+        ];
+
+        let currentIndex = 0;
+        const messageEl = document.getElementById('messageText');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Provide smooth fade out and in
+        messageEl.style.transition = 'opacity 0.25s ease';
+
+        nextBtn.addEventListener('click', () => {
+            messageEl.style.opacity = 0;
+
+            setTimeout(() => {
+                nextBtn.classList.remove(contentData[currentIndex].btnColor);
+
+                currentIndex = (currentIndex + 1) % contentData.length;
+
+                messageEl.innerText = contentData[currentIndex].text;
+                nextBtn.classList.add(contentData[currentIndex].btnColor);
+
+                messageEl.style.opacity = 1;
+            }, 250);
+        });
+    </script>
 </body>
+
 </html>
